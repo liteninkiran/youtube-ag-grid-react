@@ -29,7 +29,10 @@ const App = () => {
             headerName: 'Company',
         },
         { field: 'model' },
-        { field: 'price' },
+        {
+            field: 'price',
+            valueFormatter: (p) => '£' + p.value.toLocaleString(),
+        },
         { field: 'electric' },
     ]);
 
