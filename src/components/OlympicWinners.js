@@ -6,20 +6,27 @@ import { AgGridReact } from 'ag-grid-react';
 
 const url = 'https://www.ag-grid.com/example-assets/olympic-winners.json';
 const SimpleComp = (p) => {
-    const onPound = useCallback(() => window.alert(`Pound ${p.value}`));
-    const onAt = useCallback(() => window.alert(`At ${p.value}`));
+    const onAt = useCallback(() => window.alert(`At ${p.value}`), [p.value]);
+    console.log(p);
     return (
         <>
-            <button onClick={onPound}>£</button>
-            <button onClick={onAt}>@</button>
+            <button onClick={onAt}>{p.buttonText}</button>
             {p.value}
         </>
     );
 };
 
 const colDefs = [
-    { field: 'athlete', cellRenderer: SimpleComp },
-    { field: 'age' },
+    {
+        field: 'athlete',
+        cellRenderer: SimpleComp,
+        cellRendererParams: { buttonText: '=' },
+    },
+    {
+        field: 'age',
+        cellRenderer: SimpleComp,
+        cellRendererParams: { buttonText: '>' },
+    },
     { field: 'country' },
     { field: 'year' },
     { field: 'date' },
