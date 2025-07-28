@@ -34,7 +34,10 @@ class PullComp extends Component {
 }
 
 const colDefs = [
-    { field: 'athlete', cellRenderer: PushComp },
+    {
+        field: 'athlete',
+        cellRenderer: PushComp,
+    },
     {
         field: 'age',
         cellRenderer: (p) => (
@@ -44,8 +47,21 @@ const colDefs = [
             </>
         ),
     },
-    { field: 'country', cellRenderer: PullComp },
-    { field: 'year' },
+    {
+        field: 'country',
+        cellRenderer: PullComp,
+    },
+    {
+        field: 'year',
+        cellRendererSelector: (p) => {
+            if (p.value === 2000) {
+                return { component: PushComp };
+            }
+            if (p.value === 2012) {
+                return { component: PullComp };
+            }
+        },
+    },
     { field: 'date' },
     { field: 'sport' },
     { field: 'gold' },
