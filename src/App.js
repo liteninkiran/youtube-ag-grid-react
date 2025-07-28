@@ -1,12 +1,19 @@
-import { AgGridReact } from 'ag-grid-react';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { MenuModule } from 'ag-grid-enterprise';
-import { ClientSideRowModelModule } from 'ag-grid-community';
+// React
+import { useMemo, useState } from 'react';
 
+// AG Grid
+import { AgGridReact } from 'ag-grid-react';
+import {
+    AllCommunityModule,
+    ModuleRegistry,
+    ClientSideRowModelModule,
+} from 'ag-grid-community';
+import { MenuModule } from 'ag-grid-enterprise';
+
+// CSS
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
 import './App.css';
-import { useMemo, useState } from 'react';
 
 ModuleRegistry.registerModules([
     AllCommunityModule,
@@ -37,6 +44,8 @@ const App = () => {
 
     const memoFn = () => ({
         flex: 1,
+        filter: true,
+        floatingFilter: true,
     });
 
     const defaultColDef = useMemo(memoFn, []);
@@ -48,7 +57,6 @@ const App = () => {
             valueGetter: (p) => p.data.make + ' ' + p.data.price,
             headerName: 'Company',
             cellRenderer: MyCellComponent,
-            flex: 2,
         },
         {
             field: 'model',
