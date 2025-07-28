@@ -46,6 +46,7 @@ const App = () => {
         flex: 1,
         filter: true,
         floatingFilter: true,
+        editable: true,
     });
 
     const defaultColDef = useMemo(memoFn, []);
@@ -57,6 +58,8 @@ const App = () => {
             valueGetter: (p) => p.data.make + ' ' + p.data.price,
             headerName: 'Company',
             cellRenderer: MyCellComponent,
+            cellEditor: 'agSelectCellEditor',
+            cellEditorParams: { values: ['Tesla', 'Ford', 'Toyota'] },
         },
         {
             field: 'model',
