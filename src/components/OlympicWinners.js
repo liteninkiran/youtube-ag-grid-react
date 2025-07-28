@@ -12,7 +12,10 @@ const OlympicWinners = () => {
     const [colDefs, setColDefs] = useState([
         { field: 'athlete' },
         { field: 'age' },
-        { field: 'country' },
+        {
+            field: 'country',
+            rowGroup: true,
+        },
         { field: 'year' },
         { field: 'date' },
         { field: 'sport' },

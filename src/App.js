@@ -4,7 +4,7 @@ import {
     ModuleRegistry,
     ClientSideRowModelModule,
 } from 'ag-grid-community';
-import { MenuModule } from 'ag-grid-enterprise';
+import { MenuModule, RowGroupingModule } from 'ag-grid-enterprise';
 
 // CSS
 import 'ag-grid-community/styles/ag-grid.css';
@@ -19,6 +19,7 @@ ModuleRegistry.registerModules([
     AllCommunityModule,
     ClientSideRowModelModule,
     MenuModule,
+    RowGroupingModule,
 ]);
 
 const App = () => {
