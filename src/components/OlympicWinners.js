@@ -1,36 +1,28 @@
 // React
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, memo } from 'react';
 
 // AG Grid
 import { AgGridReact } from 'ag-grid-react';
 
 const url = 'https://www.ag-grid.com/example-assets/olympic-winners.json';
-const src =
-    'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExc3VuM3pmMG1ybWFtbGkwcjl4M2hra2t5ejdnY3BnYjBvODBtczQ2NSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohhwiSbK4IdpTIB0Y/giphy.gif';
 
 const MyComp = (props) => {
-    const imgStyle = {
-        width: 40,
-        top: 0,
-        left: 0,
-        position: 'absolute',
-    };
-    const style = {
-        marginLeft: 40,
-    };
+    const renderCount = useRef(1);
     return (
-        <span style={style}>
-            <img src={src} style={imgStyle} alt='Spinner' />
-            {props.value}
-        </span>
+        <>
+            <b>({renderCount.current++})</b> {props.value}
+        </>
     );
 };
 
 const colDefs = [
-    { field: 'athlete' },
+    {
+        field: 'athlete',
+        cellRenderer: memo(MyComp),
+    },
     {
         field: 'age',
-        cellRenderer: MyComp,
+        cellRenderer: memo(MyComp),
     },
     { field: 'country' },
     { field: 'year' },
@@ -49,6 +41,7 @@ const OlympicWinners = () => {
     const memoFn = () => ({
         sortable: true,
         filter: true,
+        // cellRenderer: MyComp,
     });
     const effectFn = () => {
         fetch(url)
