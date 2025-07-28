@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import { AgGridReact } from 'ag-grid-react';
+import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import { MenuModule } from 'ag-grid-enterprise';
+import { ClientSideRowModelModule } from 'ag-grid-community';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-quartz.css';
+import './App.css';
+import { useState } from 'react';
+
+ModuleRegistry.registerModules([
+    AllCommunityModule,
+    ClientSideRowModelModule,
+    MenuModule,
+]);
+
+const App = () => {
+    const [rowData, setRowData] = useState([
+        { make: 'Tesla', model: 'Model Y', price: 64950, electric: true },
+        { make: 'Ford', model: 'F-Series', price: 33850, electric: false },
+        { make: 'Toyota', model: 'Corolla', price: 29600, electric: false },
+    ]);
+
+    // Column Definitions: Defines the columns to be displayed.
+    const [colDefs, setColDefs] = useState([
+        { field: 'make' },
+        { field: 'model' },
+        { field: 'price' },
+        { field: 'electric' },
+    ]);
+
+    return (
+        <div style={{ height: 500 }}>
+            <AgGridReact
+                rowData={rowData}
+                columnDefs={colDefs}
+                theme='legacy'
+                className='ag-theme-quartz'
+            />
+        </div>
+    );
+};
 
 export default App;
