@@ -14,6 +14,20 @@ ModuleRegistry.registerModules([
     MenuModule,
 ]);
 
+const MyCellComponent = (p) => {
+    return (
+        <>
+            <button
+                onClick={() => window.alert('Action')}
+                style={{ marginRight: '10px' }}
+            >
+                +
+            </button>
+            {p.value}
+        </>
+    );
+};
+
 const App = () => {
     const [rowData, setRowData] = useState([
         { make: 'Tesla', model: 'Model Y', price: 64950, electric: true },
@@ -27,6 +41,7 @@ const App = () => {
             field: 'make',
             valueGetter: (p) => p.data.make + ' ' + p.data.price,
             headerName: 'Company',
+            cellRenderer: MyCellComponent,
         },
         { field: 'model' },
         {
