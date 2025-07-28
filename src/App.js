@@ -23,7 +23,11 @@ const App = () => {
 
     // Column Definitions: Defines the columns to be displayed.
     const [colDefs, setColDefs] = useState([
-        { field: 'make' },
+        {
+            field: 'make',
+            valueGetter: (p) => p.data.make + ' ' + p.data.price,
+            headerName: 'Company',
+        },
         { field: 'model' },
         { field: 'price' },
         { field: 'electric' },
