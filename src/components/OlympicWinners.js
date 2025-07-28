@@ -6,7 +6,15 @@ import { AgGridReact } from 'ag-grid-react';
 
 const url = 'https://www.ag-grid.com/example-assets/olympic-winners.json';
 const SimpleComp = (p) => {
-    return p.value;
+    const onPound = useCallback(() => window.alert(`Pound ${p.value}`));
+    const onAt = useCallback(() => window.alert(`At ${p.value}`));
+    return (
+        <>
+            <button onClick={onPound}>£</button>
+            <button onClick={onAt}>@</button>
+            {p.value}
+        </>
+    );
 };
 
 const colDefs = [
