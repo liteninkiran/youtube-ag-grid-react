@@ -29,21 +29,31 @@ ModuleRegistry.registerModules([
 const App = () => {
     const [rowData, setRowData] = useState(data);
 
-    const memoFn = () => ({
+    const defaultColDefMemoFn = () => ({
         flex: 1,
         filter: true,
         floatingFilter: true,
         editable: true,
     });
 
-    const defaultColDef = useMemo(memoFn, []);
+    const rowClassRuleMemoFn = () => ({
+        'red-row': (p) => p.data.company === 'SpaceX',
+    });
+
+    const rowSelectionMemoFn = () => ({
+        mode: 'multiRow',
+        checkboxes: 'mission',
+        headerCheckbox: true,
+        enableSelectionWithoutKeys: true,
+        enableClickSelection: true,
+    });
 
     // Column Definitions: Defines the columns to be displayed.
     const [colDefs, setColDefs] = useState([
         {
             field: 'mission',
             valueGetter: (p) => p.data.mission + ' ' + p.data.price,
-            checkboxSelection: true,
+            // checkboxSelection: true,
         },
         {
             field: 'company',
@@ -63,11 +73,18 @@ const App = () => {
         {
             field: 'price',
             valueFormatter: (p) => '£' + p.value.toLocaleString(),
+            cellClassRules: {
+                'green-cell': (p) => p.value > 20000000,
+            },
         },
         {
             field: 'successful',
         },
     ]);
+
+    const defaultColDef = useMemo(defaultColDefMemoFn, []);
+    const rowClassRules = useMemo(rowClassRuleMemoFn, []);
+    const rowSelection = useMemo(rowSelectionMemoFn, []);
 
     return (
         <div style={{ height: '100vh' }}>
@@ -77,10 +94,11 @@ const App = () => {
                 theme='legacy'
                 className='ag-theme-quartz'
                 defaultColDef={defaultColDef}
-                rowSelection='multiple'
+                rowSelection={rowSelection}
                 pagination={true}
                 paginationPageSize={15}
                 paginationPageSizeSelector={[10, 15, 20, 25, 50, 100]}
+                rowClassRules={rowClassRules}
             />
         </div>
     );

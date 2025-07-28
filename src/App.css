@@ -4,3 +4,11 @@
     --ag-header-background-color: rgb(128, 250, 193);
     --ag-row-hover-color: rgb(100, 138, 255);
 }
+
+.green-cell {
+    background-color: rgb(192, 226, 192);
+}
+
+.red-row {
+    background-color: rgb(223, 196, 196);
+}
