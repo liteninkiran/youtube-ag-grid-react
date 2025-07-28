@@ -1,21 +1,25 @@
 // React
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 // AG Grid
 import { AgGridReact } from 'ag-grid-react';
 
 const url = 'https://www.ag-grid.com/example-assets/olympic-winners.json';
+const SimpleComp = (p) => {
+    return p.value;
+};
+
 const colDefs = [
-    { field: 'athlete', enableRowGroup: true },
-    { field: 'age', enableRowGroup: true },
-    { field: 'country', enableRowGroup: true, rowGroup: true },
-    { field: 'year', enableRowGroup: true },
-    { field: 'date', enableRowGroup: true },
-    { field: 'sport', enableRowGroup: true },
-    { field: 'gold', enableRowGroup: true },
-    { field: 'silver', enableRowGroup: true },
-    { field: 'bronze', enableRowGroup: true },
-    { field: 'total', enableRowGroup: true },
+    { field: 'athlete', cellRenderer: SimpleComp },
+    { field: 'age' },
+    { field: 'country' },
+    { field: 'year' },
+    { field: 'date' },
+    { field: 'sport' },
+    { field: 'gold' },
+    { field: 'silver' },
+    { field: 'bronze' },
+    { field: 'total' },
 ];
 
 const OlympicWinners = () => {
@@ -25,7 +29,6 @@ const OlympicWinners = () => {
     const memoFn = () => ({
         sortable: true,
         filter: true,
-        enableRowGroup: true,
     });
     const effectFn = () => {
         fetch(url)
@@ -43,7 +46,6 @@ const OlympicWinners = () => {
             defaultColumnDef={defaultColumnDef}
             theme='legacy'
             className='ag-theme-quartz'
-            rowGroupPanelShow='always'
         />
     );
 };
