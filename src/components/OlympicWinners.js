@@ -1,67 +1,16 @@
 // React
-import {
-    useCallback,
-    useEffect,
-    useMemo,
-    useRef,
-    useState,
-    Component,
-} from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 // AG Grid
 import { AgGridReact } from 'ag-grid-react';
 
 const url = 'https://www.ag-grid.com/example-assets/olympic-winners.json';
-const PushComp = (p) => {
-    const onAt = useCallback(() => window.alert('Push'), []);
-    return (
-        <>
-            <button onClick={onAt}>Push</button>
-            {p.value}
-        </>
-    );
-};
-
-class PullComp extends Component {
-    render() {
-        return (
-            <>
-                <button onClick={() => window.alert('Pull')}>Pull</button>
-                {this.props.value}
-            </>
-        );
-    }
-}
 
 const colDefs = [
-    {
-        field: 'athlete',
-        cellRenderer: PushComp,
-    },
-    {
-        field: 'age',
-        cellRenderer: (p) => (
-            <>
-                <b>Age: </b>
-                {p.value}
-            </>
-        ),
-    },
-    {
-        field: 'country',
-        cellRenderer: PullComp,
-    },
-    {
-        field: 'year',
-        cellRendererSelector: (p) => {
-            if (p.value === 2000) {
-                return { component: PushComp };
-            }
-            if (p.value === 2012) {
-                return { component: PullComp };
-            }
-        },
-    },
+    { field: 'athlete' },
+    { field: 'age' },
+    { field: 'country' },
+    { field: 'year' },
     { field: 'date' },
     { field: 'sport' },
     { field: 'gold' },
