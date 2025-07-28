@@ -60,6 +60,7 @@ const App = () => {
             cellRenderer: MyCellComponent,
             cellEditor: 'agSelectCellEditor',
             cellEditorParams: { values: ['Tesla', 'Ford', 'Toyota'] },
+            checkboxSelection: true,
         },
         {
             field: 'model',
@@ -81,6 +82,7 @@ const App = () => {
                 theme='legacy'
                 className='ag-theme-quartz'
                 defaultColDef={defaultColDef}
+                rowSelection='multiple'
             />
         </div>
     );
