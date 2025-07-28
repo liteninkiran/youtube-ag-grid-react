@@ -5,26 +5,28 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 
 const url = 'https://www.ag-grid.com/example-assets/olympic-winners.json';
+const colDefs = [
+    { field: 'athlete', enableRowGroup: true },
+    { field: 'age', enableRowGroup: true },
+    { field: 'country', enableRowGroup: true, rowGroup: true },
+    { field: 'year', enableRowGroup: true },
+    { field: 'date', enableRowGroup: true },
+    { field: 'sport', enableRowGroup: true },
+    { field: 'gold', enableRowGroup: true },
+    { field: 'silver', enableRowGroup: true },
+    { field: 'bronze', enableRowGroup: true },
+    { field: 'total', enableRowGroup: true },
+];
 
 const OlympicWinners = () => {
     const gridRef = useRef();
     const [rowData, setRowData] = useState();
-    const [colDefs, setColDefs] = useState([
-        { field: 'athlete' },
-        { field: 'age' },
-        {
-            field: 'country',
-            rowGroup: true,
-        },
-        { field: 'year' },
-        { field: 'date' },
-        { field: 'sport' },
-        { field: 'gold' },
-        { field: 'sliver' },
-        { field: 'bronze' },
-        { field: 'total' },
-    ]);
-    const memoFn = () => ({ sortable: true, filter: true });
+
+    const memoFn = () => ({
+        sortable: true,
+        filter: true,
+        enableRowGroup: true,
+    });
     const effectFn = () => {
         fetch(url)
             .then((result) => result.json())
@@ -34,16 +36,15 @@ const OlympicWinners = () => {
     useEffect(effectFn, []);
 
     return (
-        <div style={{ height: '100vh' }}>
-            <AgGridReact
-                ref={gridRef}
-                rowData={rowData}
-                columnDefs={colDefs}
-                defaultColumnDef={defaultColumnDef}
-                theme='legacy'
-                className='ag-theme-quartz'
-            />
-        </div>
+        <AgGridReact
+            ref={gridRef}
+            rowData={rowData}
+            columnDefs={colDefs}
+            defaultColumnDef={defaultColumnDef}
+            theme='legacy'
+            className='ag-theme-quartz'
+            rowGroupPanelShow='always'
+        />
     );
 };
 

@@ -1,10 +1,10 @@
 // AG Grid
+import { ModuleRegistry, ClientSideRowModelModule } from 'ag-grid-community';
 import {
-    AllCommunityModule,
-    ModuleRegistry,
-    ClientSideRowModelModule,
-} from 'ag-grid-community';
-import { MenuModule, RowGroupingModule } from 'ag-grid-enterprise';
+    MenuModule,
+    RowGroupingModule,
+    RowGroupingPanelModule,
+} from 'ag-grid-enterprise';
 
 // CSS
 import 'ag-grid-community/styles/ag-grid.css';
@@ -16,15 +16,19 @@ import SpaceMission from './components/SpaceMission';
 import OlympicWinners from './components/OlympicWinners';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
     ClientSideRowModelModule,
     MenuModule,
     RowGroupingModule,
+    RowGroupingPanelModule,
 ]);
 
 const App = () => {
     // return <SpaceMission />;
-    return <OlympicWinners />;
+    return (
+        <div style={{ height: '100vh', margin: '20px' }}>
+            <OlympicWinners />
+        </div>
+    );
 };
 
 export default App;

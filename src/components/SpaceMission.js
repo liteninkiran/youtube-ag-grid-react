@@ -71,20 +71,18 @@ const SpaceMission = () => {
     useEffect(effectFn, []);
 
     return (
-        <div style={{ height: '100vh' }}>
-            <AgGridReact
-                rowData={rowData}
-                columnDefs={colDefs}
-                theme='legacy'
-                className='ag-theme-quartz'
-                defaultColDef={defaultColDef}
-                rowSelection={rowSelection}
-                pagination={true}
-                paginationPageSize={15}
-                paginationPageSizeSelector={[10, 15, 20, 25, 50, 100]}
-                rowClassRules={rowClassRules}
-            />
-        </div>
+        <AgGridReact
+            rowData={rowData}
+            columnDefs={colDefs}
+            theme='legacy'
+            className='ag-theme-quartz'
+            defaultColDef={defaultColDef}
+            rowSelection={rowSelection}
+            pagination={true}
+            paginationPageSize={15}
+            paginationPageSizeSelector={[10, 15, 20, 25, 50, 100]}
+            rowClassRules={rowClassRules}
+        />
     );
 };
 
