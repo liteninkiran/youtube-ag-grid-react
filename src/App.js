@@ -13,6 +13,7 @@ import './App.css';
 
 // Components
 import SpaceMission from './components/SpaceMission';
+import OlympicWinners from './components/OlympicWinners';
 
 ModuleRegistry.registerModules([
     AllCommunityModule,
@@ -21,7 +22,8 @@ ModuleRegistry.registerModules([
 ]);
 
 const App = () => {
-    return <SpaceMission />;
+    // return <SpaceMission />;
+    return <OlympicWinners />;
 };
 
 export default App;

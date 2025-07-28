@@ -1,14 +1,13 @@
 // React
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 // AG Grid
 import { AgGridReact } from 'ag-grid-react';
 
-// Data
-import { data } from '../data';
+const url = 'https://www.ag-grid.com/example-assets/space-mission-data.json';
 
 const SpaceMission = () => {
-    const [rowData, setRowData] = useState(data);
+    const [rowData, setRowData] = useState();
 
     const defaultColDefMemoFn = () => ({
         flex: 1,
@@ -16,11 +15,9 @@ const SpaceMission = () => {
         floatingFilter: true,
         editable: true,
     });
-
     const rowClassRuleMemoFn = () => ({
         'red-row': (p) => p.data.company === 'SpaceX',
     });
-
     const rowSelectionMemoFn = () => ({
         mode: 'multiRow',
         checkboxes: 'mission',
@@ -28,6 +25,11 @@ const SpaceMission = () => {
         enableSelectionWithoutKeys: true,
         enableClickSelection: true,
     });
+    const effectFn = () => {
+        fetch(url)
+            .then((result) => result.json())
+            .then((rowData) => setRowData(rowData));
+    };
 
     // Column Definitions: Defines the columns to be displayed.
     const [colDefs, setColDefs] = useState([
@@ -66,6 +68,7 @@ const SpaceMission = () => {
     const defaultColDef = useMemo(defaultColDefMemoFn, []);
     const rowClassRules = useMemo(rowClassRuleMemoFn, []);
     const rowSelection = useMemo(rowSelectionMemoFn, []);
+    useEffect(effectFn, []);
 
     return (
         <div style={{ height: '100vh' }}>
