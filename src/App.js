@@ -10,6 +10,9 @@ import {
 } from 'ag-grid-community';
 import { MenuModule } from 'ag-grid-enterprise';
 
+// Data
+import { data } from './data';
+
 // CSS
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
@@ -21,26 +24,8 @@ ModuleRegistry.registerModules([
     MenuModule,
 ]);
 
-const MyCellComponent = (p) => {
-    return (
-        <>
-            <button
-                onClick={() => window.alert('Action')}
-                style={{ marginRight: '10px' }}
-            >
-                +
-            </button>
-            {p.value}
-        </>
-    );
-};
-
 const App = () => {
-    const [rowData, setRowData] = useState([
-        { make: 'Tesla', model: 'Model Y', price: 64950, electric: true },
-        { make: 'Ford', model: 'F-Series', price: 33850, electric: false },
-        { make: 'Toyota', model: 'Corolla', price: 29600, electric: false },
-    ]);
+    const [rowData, setRowData] = useState(data);
 
     const memoFn = () => ({
         flex: 1,
@@ -54,28 +39,36 @@ const App = () => {
     // Column Definitions: Defines the columns to be displayed.
     const [colDefs, setColDefs] = useState([
         {
-            field: 'make',
-            valueGetter: (p) => p.data.make + ' ' + p.data.price,
-            headerName: 'Company',
-            cellRenderer: MyCellComponent,
-            cellEditor: 'agSelectCellEditor',
-            cellEditorParams: { values: ['Tesla', 'Ford', 'Toyota'] },
+            field: 'mission',
+            valueGetter: (p) => p.data.mission + ' ' + p.data.price,
             checkboxSelection: true,
         },
         {
-            field: 'model',
+            field: 'company',
+        },
+        {
+            field: 'location',
+        },
+        {
+            field: 'date',
+        },
+        {
+            field: 'time',
+        },
+        {
+            field: 'rocket',
         },
         {
             field: 'price',
             valueFormatter: (p) => '£' + p.value.toLocaleString(),
         },
         {
-            field: 'electric',
+            field: 'successful',
         },
     ]);
 
     return (
-        <div style={{ height: 500 }}>
+        <div style={{ height: '100vh' }}>
             <AgGridReact
                 rowData={rowData}
                 columnDefs={colDefs}
@@ -83,6 +76,9 @@ const App = () => {
                 className='ag-theme-quartz'
                 defaultColDef={defaultColDef}
                 rowSelection='multiple'
+                pagination={true}
+                paginationPageSize={15}
+                paginationPageSizeSelector={[10, 15, 20, 25, 50, 100]}
             />
         </div>
     );
