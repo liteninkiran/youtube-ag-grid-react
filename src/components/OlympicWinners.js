@@ -21,6 +21,7 @@ const OlympicWinners = () => {
     const memoFn = () => ({
         sortable: true,
         filter: true,
+        floatingFilter: true,
     });
     const effectFn = () => {
         fetch(url)
@@ -37,7 +38,6 @@ const OlympicWinners = () => {
             columnDefs={colDefs}
             defaultColumnDef={defaultColumnDef}
             theme='legacy'
-            className='ag-theme-quartz'
         />
     );
 };
