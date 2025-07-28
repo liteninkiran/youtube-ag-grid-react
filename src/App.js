@@ -6,7 +6,7 @@ import { ClientSideRowModelModule } from 'ag-grid-community';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
 import './App.css';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 ModuleRegistry.registerModules([
     AllCommunityModule,
@@ -35,6 +35,12 @@ const App = () => {
         { make: 'Toyota', model: 'Corolla', price: 29600, electric: false },
     ]);
 
+    const memoFn = () => ({
+        flex: 1,
+    });
+
+    const defaultColDef = useMemo(memoFn, []);
+
     // Column Definitions: Defines the columns to be displayed.
     const [colDefs, setColDefs] = useState([
         {
@@ -42,13 +48,18 @@ const App = () => {
             valueGetter: (p) => p.data.make + ' ' + p.data.price,
             headerName: 'Company',
             cellRenderer: MyCellComponent,
+            flex: 2,
         },
-        { field: 'model' },
+        {
+            field: 'model',
+        },
         {
             field: 'price',
             valueFormatter: (p) => '£' + p.value.toLocaleString(),
         },
-        { field: 'electric' },
+        {
+            field: 'electric',
+        },
     ]);
 
     return (
@@ -58,6 +69,7 @@ const App = () => {
                 columnDefs={colDefs}
                 theme='legacy'
                 className='ag-theme-quartz'
+                defaultColDef={defaultColDef}
             />
         </div>
     );
