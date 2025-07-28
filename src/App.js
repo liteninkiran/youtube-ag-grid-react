@@ -16,6 +16,8 @@ import { data } from './data';
 // CSS
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
+// import 'ag-grid-community/styles/ag-theme-material.css';
+// import 'ag-grid-community/styles/ag-theme-alpine.css';
 import './App.css';
 
 ModuleRegistry.registerModules([
