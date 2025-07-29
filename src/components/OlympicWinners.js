@@ -98,8 +98,9 @@ const OlympicWinners = () => {
                     Clear Filters
                 </button>
             </div>
-            <div className='ag-theme-quartz' style={{ height: '100%' }}>
+            <div className='ag-theme-quartz' style={{ height: '300px' }}>
                 <AgGridReact
+                    popupParent={document.body}
                     ref={gridRef}
                     rowData={rowData}
                     columnDefs={colDefs}
