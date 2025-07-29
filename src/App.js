@@ -1,14 +1,14 @@
 // AG Grid
-import {
-    AllCommunityModule,
-    ModuleRegistry,
-    ClientSideRowModelModule,
-} from 'ag-grid-community';
+import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import {
     MenuModule,
     RowGroupingModule,
     RowGroupingPanelModule,
+    SetFilterModule,
+    ClientSideRowModelModule,
+    MultiFilterModule,
 } from 'ag-grid-enterprise';
+import 'ag-grid-enterprise';
 
 // CSS
 import 'ag-grid-community/styles/ag-grid.css';
@@ -25,6 +25,8 @@ ModuleRegistry.registerModules([
     MenuModule,
     RowGroupingModule,
     RowGroupingPanelModule,
+    SetFilterModule,
+    MultiFilterModule,
 ]);
 
 const App = () => {

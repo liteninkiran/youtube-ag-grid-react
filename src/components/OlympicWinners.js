@@ -11,9 +11,18 @@ const colDefs = [
         field: 'athlete',
         filter: 'agTextColumnFilter',
     },
-    { field: 'age', filter: 'agNumberColumnFilter' },
-    { field: 'country' },
-    { field: 'year' },
+    {
+        field: 'age',
+        filter: 'agNumberColumnFilter',
+    },
+    {
+        field: 'year',
+        filter: 'agSetColumnFilter',
+    },
+    {
+        field: 'country',
+        filter: 'agMultiColumnFilter',
+    },
     {
         field: 'date',
         filter: 'agDateColumnFilter',
