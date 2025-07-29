@@ -20,13 +20,17 @@ const OlympicWinners = () => {
 
     const memoFn = () => ({
         flex: 1,
+        filterParams: {
+            debounceMs: 2000,
+            buttons: ['apply', 'clear', 'cancel', 'reset'],
+        },
     });
     const effectFn = () => {
         fetch(url)
             .then((result) => result.json())
             .then((rowData) => setRowData(rowData));
     };
-    const defaultColumnDef = useMemo(memoFn, []);
+    const defaultColDef = useMemo(memoFn, []);
     useEffect(effectFn, []);
 
     return (
@@ -34,7 +38,7 @@ const OlympicWinners = () => {
             ref={gridRef}
             rowData={rowData}
             columnDefs={colDefs}
-            defaultColDef={defaultColumnDef}
+            defaultColDef={defaultColDef}
             theme='legacy'
         />
     );
