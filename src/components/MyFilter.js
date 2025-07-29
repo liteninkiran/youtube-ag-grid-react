@@ -2,7 +2,7 @@ import { useGridFilter } from 'ag-grid-react';
 import { useCallback } from 'react';
 
 const MyFilter = (props) => {
-    const { model, onModelChange, getValue } = props;
+    const { model, onModelChange, getValue, title } = props;
     const valueChangedFn = (p) => {
         const newValue = p.target.value;
         onModelChange(newValue === '' ? null : newValue);
@@ -12,14 +12,15 @@ const MyFilter = (props) => {
     const doesFilterPass = useCallback(doesFilterPassFn, [getValue, model]);
     useGridFilter({ doesFilterPass });
     return (
-        <>
+        <div>
+            <h3>{title}</h3>
             <input
                 type='text'
                 value={model || ''}
                 placeholder='Filter'
                 onChange={valueChanged}
             />
-        </>
+        </div>
     );
 };
 
