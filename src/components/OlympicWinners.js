@@ -11,7 +11,7 @@ const url = 'https://www.ag-grid.com/example-assets/olympic-winners.json';
 const colDefs = [
     { field: 'athlete' },
     { field: 'year', filter: MyFilter },
-    { field: 'age' },
+    { field: 'age', filter: MyFilter },
     { field: 'country' },
     { field: 'date' },
     { field: 'sport' },
