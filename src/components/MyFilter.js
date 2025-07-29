@@ -2,18 +2,25 @@ import { useGridFilter } from 'ag-grid-react';
 import { useCallback } from 'react';
 
 const MyFilter = (props) => {
-    const { model, onModelChange, getValue, title } = props;
-    const valueChangedFn = (p) => {
-        const newValue = p.target.value;
-        onModelChange(newValue === '' ? null : newValue);
-    };
+    // Props
+    const { model, onModelChange, getValue } = props;
+
+    // Functions
+    const getVal = (val) => (val === '' ? null : val);
+    const valueChangedFn = (p) => onModelChange(getVal(p.target.value));
     const doesFilterPassFn = ({ node }) => getValue(node) == model;
+    const getModelAsStringFn = () => model;
+
+    // Callbacks
     const valueChanged = useCallback(valueChangedFn, [onModelChange]);
     const doesFilterPass = useCallback(doesFilterPassFn, [getValue, model]);
-    useGridFilter({ doesFilterPass });
+    const getModelAsString = useCallback(getModelAsStringFn, [model]);
+
+    // Filtering
+    useGridFilter({ doesFilterPass, getModelAsString });
+
     return (
         <div>
-            <h3>{title}</h3>
             <input
                 type='text'
                 value={model || ''}
