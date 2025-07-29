@@ -1,14 +1,16 @@
 // React
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 // AG Grid
 import { AgGridReact } from 'ag-grid-react';
+
+import MyFilter from './MyFilter';
 
 const url = 'https://www.ag-grid.com/example-assets/olympic-winners.json';
 
 const colDefs = [
     { field: 'athlete' },
-    { field: 'year' },
+    { field: 'year', filter: MyFilter },
     { field: 'age' },
     { field: 'country' },
     { field: 'date' },
@@ -38,7 +40,6 @@ const OlympicWinners = () => {
         <div className='ag-theme-quartz' style={{ height: '100%' }}>
             <div style={{ height: '100%' }}>
                 <AgGridReact
-                    reactiveCustomComponents
                     ref={gridRef}
                     rowData={rowData}
                     columnDefs={colDefs}
