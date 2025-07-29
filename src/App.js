@@ -30,10 +30,7 @@ ModuleRegistry.registerModules([
 const App = () => {
     // return <SpaceMission />;
     return (
-        <div
-            style={{ height: '100vh', margin: '20px' }}
-            className='ag-theme-quartz'
-        >
+        <div style={{ height: '100vh', margin: '20px' }}>
             {/* <SpaceMission /> */}
             <OlympicWinners />
         </div>
