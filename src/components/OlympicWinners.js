@@ -7,26 +7,16 @@ import { AgGridReact } from 'ag-grid-react';
 const url = 'https://www.ag-grid.com/example-assets/olympic-winners.json';
 
 const colDefs = [
-    {
-        field: 'athlete',
-        filter: 'agTextColumnFilter',
-    },
-    {
-        field: 'age',
-        filter: 'agNumberColumnFilter',
-    },
-    {
-        field: 'year',
-        filter: 'agSetColumnFilter',
-    },
-    {
-        field: 'country',
-        filter: 'agMultiColumnFilter',
-    },
-    {
-        field: 'date',
-        filter: 'agDateColumnFilter',
-    },
+    { field: 'athlete' },
+    { field: 'year' },
+    { field: 'age' },
+    { field: 'country' },
+    { field: 'date' },
+    { field: 'sport' },
+    { field: 'gold' },
+    { field: 'silver' },
+    { field: 'bronze' },
+    { field: 'total' },
 ];
 
 const OlympicWinners = () => {
@@ -35,7 +25,6 @@ const OlympicWinners = () => {
 
     const defaultColDefMemoFn = () => ({
         flex: 1,
-        floatingFilter: true,
     });
     const effectFn = () => {
         fetch(url)
@@ -45,66 +34,16 @@ const OlympicWinners = () => {
     const defaultColDef = useMemo(defaultColDefMemoFn, []);
     useEffect(effectFn, []);
 
-    const savedFilteredState = useRef();
-
-    const saveCallback = () => {
-        const filterModel = gridRef.current.api.getFilterModel();
-        savedFilteredState.current = filterModel;
-    };
-    const applyCallback = () => {
-        const filterModel = savedFilteredState.current;
-        gridRef.current.api.setFilterModel(filterModel);
-    };
-    const clearCallback = () => {
-        gridRef.current.api.setFilterModel({});
-    };
-
-    const onSave = useCallback(saveCallback, []);
-    const onApply = useCallback(applyCallback, []);
-    const onClear = useCallback(clearCallback, []);
-
     return (
-        <div style={{ height: '100%' }}>
-            <div style={{ marginBottom: '20px' }}>
-                <button
-                    onClick={onSave}
-                    style={{
-                        marginRight: '20px',
-                        height: '40px',
-                        width: '100px',
-                    }}
-                >
-                    Save
-                </button>
-                <button
-                    onClick={onApply}
-                    style={{
-                        marginRight: '20px',
-                        height: '40px',
-                        width: '100px',
-                    }}
-                >
-                    Apply
-                </button>
-
-                <button
-                    onClick={onClear}
-                    style={{
-                        marginRight: '20px',
-                        height: '40px',
-                        width: '100px',
-                    }}
-                >
-                    Clear Filters
-                </button>
-            </div>
-            <div className='ag-theme-quartz' style={{ height: '300px' }}>
+        <div className='ag-theme-quartz' style={{ height: '100%' }}>
+            <div style={{ height: '100%' }}>
                 <AgGridReact
-                    popupParent={document.body}
+                    reactiveCustomComponents
                     ref={gridRef}
                     rowData={rowData}
                     columnDefs={colDefs}
                     defaultColDef={defaultColDef}
+                    animateRows={true}
                     theme='legacy'
                 />
             </div>
