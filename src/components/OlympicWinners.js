@@ -27,6 +27,7 @@ const OlympicWinners = () => {
 
     const defaultColDefMemoFn = () => ({
         flex: 1,
+        editable: true,
     });
     const effectFn = () => {
         fetch(url)
