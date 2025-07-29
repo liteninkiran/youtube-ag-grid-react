@@ -36,7 +36,7 @@ const OlympicWinners = () => {
             ref={gridRef}
             rowData={rowData}
             columnDefs={colDefs}
-            defaultColumnDef={defaultColumnDef}
+            defaultColDef={defaultColumnDef}
             theme='legacy'
         />
     );

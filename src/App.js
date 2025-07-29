@@ -1,5 +1,9 @@
 // AG Grid
-import { ModuleRegistry, ClientSideRowModelModule } from 'ag-grid-community';
+import {
+    AllCommunityModule,
+    ModuleRegistry,
+    ClientSideRowModelModule,
+} from 'ag-grid-community';
 import {
     MenuModule,
     RowGroupingModule,
@@ -16,6 +20,7 @@ import SpaceMission from './components/SpaceMission';
 import OlympicWinners from './components/OlympicWinners';
 
 ModuleRegistry.registerModules([
+    AllCommunityModule,
     ClientSideRowModelModule,
     MenuModule,
     RowGroupingModule,
