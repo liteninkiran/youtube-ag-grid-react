@@ -7,11 +7,11 @@ import { AgGridReact } from 'ag-grid-react';
 const url = 'https://www.ag-grid.com/example-assets/olympic-winners.json';
 
 const colDefs = [
-    { field: 'athlete' },
-    { field: 'age' },
+    { field: 'athlete', filter: 'agTextColumnFilter' },
+    { field: 'age', filter: 'agNumberColumnFilter' },
     { field: 'country' },
     { field: 'year' },
-    { field: 'date' },
+    { field: 'date', filter: 'agDateColumnFilter' },
 ];
 
 const OlympicWinners = () => {
@@ -19,9 +19,7 @@ const OlympicWinners = () => {
     const [rowData, setRowData] = useState();
 
     const memoFn = () => ({
-        sortable: true,
-        filter: true,
-        floatingFilter: true,
+        flex: 1,
     });
     const effectFn = () => {
         fetch(url)
