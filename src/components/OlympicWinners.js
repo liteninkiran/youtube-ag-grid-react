@@ -11,7 +11,31 @@ const colDefs = [
     { field: 'age', filter: 'agNumberColumnFilter' },
     { field: 'country' },
     { field: 'year' },
-    { field: 'date', filter: 'agDateColumnFilter' },
+    {
+        field: 'date',
+        filter: 'agDateColumnFilter',
+        filterParams: {
+            comparator: (dateFrom, cellValue) => {
+                if (cellValue === null) {
+                    return 0;
+                }
+
+                const dateParts = cellValue.split('/');
+                const day = Number(dateParts[0]);
+                const month = Number(dateParts[1]) - 1;
+                const year = Number(dateParts[2]);
+                const cellDate = new Date(year, month, day);
+
+                if (cellDate < dateFrom) {
+                    return -1;
+                } else if (cellDate > dateFrom) {
+                    return 1;
+                }
+
+                return 0;
+            },
+        },
+    },
 ];
 
 const OlympicWinners = () => {
@@ -20,10 +44,10 @@ const OlympicWinners = () => {
 
     const memoFn = () => ({
         flex: 1,
-        filterParams: {
-            debounceMs: 2000,
-            buttons: ['apply', 'clear', 'cancel', 'reset'],
-        },
+        // filterParams: {
+        //     debounceMs: 2000,
+        //     buttons: ['apply', 'clear', 'cancel', 'reset'],
+        // },
     });
     const effectFn = () => {
         fetch(url)
