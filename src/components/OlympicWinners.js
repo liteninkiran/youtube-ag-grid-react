@@ -10,9 +10,14 @@ const colDefs = [
     {
         field: 'athlete',
         headerName: 'Competitor',
-        resizable: true,
+        flex: 2,
     },
-    { field: 'age' },
+    {
+        field: 'age',
+        // width: 100,
+        // minWidth: 80,
+        // maxWidth: 200,
+    },
     { field: 'country' },
     { field: 'year' },
     { field: 'date' },
@@ -28,7 +33,8 @@ const OlympicWinners = () => {
     const [rowData, setRowData] = useState();
     const defaultColDef = useMemo(
         () => ({
-            resizable: false,
+            resizable: true,
+            flex: 1,
         }),
         []
     );
