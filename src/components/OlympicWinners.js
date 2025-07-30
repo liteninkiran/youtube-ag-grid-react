@@ -4,30 +4,12 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 // AG Grid
 import { AgGridReact } from 'ag-grid-react';
 
-import Hello from './Hello';
-import Goodbye from './Goodbye';
-
 const url = 'https://www.ag-grid.com/example-assets/olympic-winners.json';
 
 const colDefs = [
-    {
-        field: 'athlete',
-        // cellRenderer: Hello,
-        cellRendererParams: { name: 'Tom' },
-        cellRendererSelector: (p) => ({
-            component: Math.random() > 0.5 ? Hello : Goodbye,
-        }),
-    },
-    {
-        field: 'age',
-        filter: Hello,
-        filterParams: { name: 'Dick' },
-    },
-    {
-        field: 'country',
-        headerComponent: Hello,
-        headerComponentParams: { name: 'Harry' },
-    },
+    { field: 'athlete' },
+    { field: 'age' },
+    { field: 'country' },
     { field: 'year' },
     { field: 'date' },
     { field: 'sport' },
@@ -59,39 +41,6 @@ const OlympicWinners = () => {
                 defaultColDef={defaultColDef}
                 animateRows={true}
                 theme='legacy'
-                statusBar={{
-                    statusPanels: [
-                        {
-                            statusPanel: Hello,
-                            statusPanelParams: { name: 'Jack' },
-                        },
-                        {
-                            statusPanel: Goodbye,
-                            statusPanelParams: { name: 'Jill' },
-                        },
-                    ],
-                }}
-                sideBar={{
-                    toolPanels: [
-                        {
-                            id: '3',
-                            labelDefault: 'Columns',
-                            toolPanel: 'agColumnsToolPanel',
-                        },
-                        {
-                            id: '1',
-                            labelDefault: 'Custom 1',
-                            toolPanel: Hello,
-                            toolPanelParams: { name: 'Summer' },
-                        },
-                        {
-                            id: '2',
-                            labelDefault: 'Custom 2',
-                            toolPanel: Goodbye,
-                            toolPanelParams: { name: 'Winter' },
-                        },
-                    ],
-                }}
             />
         </div>
     );
