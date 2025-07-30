@@ -3,24 +3,28 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 
 // AG Grid
 import { AgGridReact } from 'ag-grid-react';
-import HelloWorldComp from './HelloWorldComp';
+import Hello from './Hello';
+import Goodbye from './Goodbye';
 
 const url = 'https://www.ag-grid.com/example-assets/olympic-winners.json';
 
 const colDefs = [
     {
         field: 'athlete',
-        cellRenderer: HelloWorldComp,
+        // cellRenderer: Hello,
         cellRendererParams: { name: 'Tom' },
+        cellRendererSelector: (p) => ({
+            component: Math.random() > 0.5 ? Hello : Goodbye,
+        }),
     },
     {
         field: 'age',
-        filter: HelloWorldComp,
+        filter: Hello,
         filterParams: { name: 'Dick' },
     },
     {
         field: 'country',
-        headerComponent: HelloWorldComp,
+        headerComponent: Hello,
         headerComponentParams: { name: 'Harry' },
     },
     { field: 'year' },
