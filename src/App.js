@@ -22,6 +22,7 @@ import './App.css';
 // Components
 import SpaceMission from './components/SpaceMission';
 import OlympicWinners from './components/OlympicWinners';
+import Cars from './components/Cars';
 
 ModuleRegistry.registerModules([
     AllCommunityModule,
@@ -40,7 +41,8 @@ const App = () => {
     return (
         <div style={{ height: '90vh', margin: '20px' }}>
             {/* <SpaceMission /> */}
-            <OlympicWinners />
+            {/* <OlympicWinners /> */}
+            <Cars />
         </div>
     );
 };
