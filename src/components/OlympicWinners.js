@@ -19,6 +19,7 @@ const colDefs = [
     { field: 'country' },
     { field: 'year' },
     { field: 'date' },
+    { field: 'date' },
     { field: 'sport' },
     { field: 'total', columnGroupShow: 'closed' },
     { field: 'gold', columnGroupShow: 'open' },
@@ -39,8 +40,10 @@ const OlympicWinners = () => {
     const onPush = useCallback(() => {
         const allColumns = gridRef.current.api.getColumns();
         const displayedColumns = gridRef.current.api.getAllDisplayedColumns();
-        const specificColumn = gridRef.current.api.getColumn('year');
+        const specificColumn = gridRef.current.api.getColumn('date_1');
         console.log(allColumns, displayedColumns, specificColumn);
+
+        gridRef.current.api.setColumnsPinned([specificColumn], 'left');
     }, []);
 
     return (
