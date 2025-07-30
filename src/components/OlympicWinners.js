@@ -8,8 +8,9 @@ const url = 'https://www.ag-grid.com/example-assets/olympic-winners.json';
 
 const colDefs = [
     {
-        // field: 'foo.bar.athlete',
+        // field: 'athlete',
         valueGetter: (p) => p.data.athlete,
+        valueFormatter: (p) => `[${p.value}]`,
         headerName: 'Competitor',
         flex: 2,
         editable: false,
