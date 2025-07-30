@@ -8,19 +8,13 @@ const url = 'https://www.ag-grid.com/example-assets/olympic-winners.json';
 
 const colDefs = [
     {
-        // field: 'athlete',
-        valueGetter: (p) => p.data.athlete,
-        valueFormatter: (p) => `[${p.value}]`,
-        headerName: 'Competitor',
-        flex: 2,
-        editable: false,
-        sortable: false,
+        field: 'athlete',
+        pinned: 'left',
+        lockPinned: true,
     },
     {
         field: 'age',
-        // width: 100,
-        // minWidth: 80,
-        // maxWidth: 200,
+        pinned: 'right',
     },
     { field: 'country' },
     { field: 'year' },
@@ -37,10 +31,7 @@ const OlympicWinners = () => {
     const [rowData, setRowData] = useState();
     const defaultColDef = useMemo(
         () => ({
-            resizable: true,
-            flex: 1,
-            editable: true,
-            sortable: true,
+            width: 300,
         }),
         []
     );
