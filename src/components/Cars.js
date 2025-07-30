@@ -9,7 +9,7 @@ const numberFormatter = Intl.NumberFormat('en-GB', {
 });
 const myValueFormatter = (p) => numberFormatter.format(p.value);
 
-const rowCount = 15;
+const rowCount = 4;
 const arr = new Array(rowCount);
 let carData = [...arr].map(() => createCar());
 
@@ -64,6 +64,26 @@ const Cars = () => {
         });
     }, []);
 
+    const onTxAsyncInsert = useCallback(() => {
+        const newRecord = createCar();
+        gridRef.current.api.applyTransactionAsync(
+            {
+                add: [newRecord],
+            },
+            (res) => {
+                //console.log(res);
+            }
+        );
+    }, []);
+
+    const onAsyncTxFlushed = useCallback((e) => {
+        console.log(e);
+    }, []);
+
+    const onFlushAsyncTx = useCallback(() => {
+        gridRef.current.api.flushAsyncTransactions();
+    }, []);
+
     const getRowId = useCallback((params) => String(params.data.id), []);
 
     const onReverse = useCallback(() => {
@@ -108,6 +128,10 @@ const Cars = () => {
                 <button onClick={onTxUpdate}>Tx Update Some</button>
                 <button onClick={onTxRemove}>Tx Remove Selected</button>
             </div>
+            <div>
+                <button onClick={onTxAsyncInsert}>Tx Async Insert One</button>
+                <button onClick={onFlushAsyncTx}>Tx Flush Async</button>
+            </div>
             <AgGridReact
                 ref={gridRef}
                 rowData={rowData}
@@ -117,6 +141,8 @@ const Cars = () => {
                 rowSelection={{ mode: 'multiRow' }}
                 getRowId={getRowId}
                 defaultColDef={defaultColDef}
+                asyncTransactionWaitMillis={5000}
+                onAsyncTransactionsFlushed={onAsyncTxFlushed}
             />
         </div>
     );
