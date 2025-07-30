@@ -3,13 +3,14 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 
 // AG Grid
 import { AgGridReact } from 'ag-grid-react';
+import HelloWorldComp from './HelloWorldComp';
 
 const url = 'https://www.ag-grid.com/example-assets/olympic-winners.json';
 
 const colDefs = [
-    { field: 'athlete' },
-    { field: 'year' },
-    { field: 'age' },
+    { field: 'athlete', cellRenderer: HelloWorldComp },
+    { field: 'year', filter: HelloWorldComp },
+    { field: 'age', headerComponent: HelloWorldComp },
     { field: 'country' },
     { field: 'date' },
     { field: 'sport' },
