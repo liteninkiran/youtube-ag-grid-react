@@ -7,7 +7,10 @@ import { AgGridReact } from 'ag-grid-react';
 const url = 'https://www.ag-grid.com/example-assets/olympic-winners.json';
 
 const colDefs = [
-    { field: 'athlete' },
+    {
+        field: 'athlete',
+        headerName: 'Competitor',
+    },
     { field: 'age' },
     { field: 'country' },
     { field: 'year' },
