@@ -6,30 +6,25 @@ import { AgGridReact } from 'ag-grid-react';
 
 const url = 'https://www.ag-grid.com/example-assets/olympic-winners.json';
 
-const colDefs = [
-    {
-        field: 'athlete',
-        tooltipField: 'country',
-        headerTooltip: 'AG Grid',
-    },
-    {
-        field: 'age',
-        tooltipValueGetter: (p) => Math.random(),
-    },
-    { field: 'country' },
-    { field: 'year' },
-    { field: 'date' },
-    { field: 'date' },
-    { field: 'sport' },
-    { field: 'total', columnGroupShow: 'closed' },
-    { field: 'gold', columnGroupShow: 'open' },
-    { field: 'silver', columnGroupShow: 'open' },
-    { field: 'bronze', columnGroupShow: 'open' },
-];
-
 const OlympicWinners = () => {
     const gridRef = useRef();
     const [rowData, setRowData] = useState();
+    const colDefs = useMemo(
+        () => [
+            { field: 'athlete' },
+            { field: 'age' },
+            { field: 'country' },
+            { field: 'year' },
+            { field: 'date' },
+            { field: 'sport' },
+            { field: 'gold' },
+            { field: 'silver' },
+            { field: 'bronze' },
+            { field: 'total' },
+        ],
+        []
+    );
+
     const defaultColDef = useMemo(() => ({}), []);
     useEffect(() => {
         fetch(url)
@@ -37,18 +32,8 @@ const OlympicWinners = () => {
             .then((rowData) => setRowData(rowData));
     }, []);
 
-    const onPush = useCallback(() => {
-        const allColumns = gridRef.current.api.getColumns();
-        const displayedColumns = gridRef.current.api.getAllDisplayedColumns();
-        const specificColumn = gridRef.current.api.getColumn('date_1');
-        console.log(allColumns, displayedColumns, specificColumn);
-
-        gridRef.current.api.setColumnsPinned([specificColumn], 'left');
-    }, []);
-
     return (
         <div className='ag-theme-quartz' style={{ height: '100%' }}>
-            <button onClick={onPush}>Click Me</button>
             <AgGridReact
                 ref={gridRef}
                 rowData={rowData}
