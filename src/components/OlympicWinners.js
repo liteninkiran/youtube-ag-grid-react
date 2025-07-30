@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 
 import MyFilter from './MyFilter';
+import MyFloatingFilter from './MyFloatingFilter';
 
 const url = 'https://www.ag-grid.com/example-assets/olympic-winners.json';
 
@@ -14,6 +15,7 @@ const colDefs = [
         field: 'year',
         filter: MyFilter,
         floatingFilter: true,
+        floatingFilterComponent: MyFloatingFilter,
     },
     { field: 'age' },
     { field: 'country' },
