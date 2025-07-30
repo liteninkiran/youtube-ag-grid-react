@@ -9,7 +9,8 @@ const url = 'https://www.ag-grid.com/example-assets/olympic-winners.json';
 const colDefs = [
     {
         field: 'athlete',
-        lockPosition: true,
+        hide: true,
+        lockVisible: true,
     },
     { field: 'age' },
     { field: 'country' },
