@@ -10,39 +10,39 @@ const OlympicWinners = () => {
     const gridRef = useRef();
     const [rowData, setRowData] = useState();
     const [includeMedals, setIncludeMedals] = useState(true);
-    const colDefs = useMemo(() => {
-        const withMedals = [
+    const [cap, setCap] = useState(false);
+    const colDefs = useMemo(
+        () => [
             { field: 'athlete' },
             { field: 'age' },
             { field: 'country' },
             { field: 'year' },
             { field: 'date' },
             { field: 'sport' },
-            { field: 'gold' },
-            { field: 'silver' },
-            { field: 'bronze' },
-            { field: 'total' },
-        ];
-        const withoutMedals = [
-            { field: 'athlete' },
-            { field: 'age' },
-            { field: 'country' },
-            { field: 'year' },
-            { field: 'date' },
-            { field: 'sport' },
-        ];
-        return includeMedals ? withMedals : withoutMedals;
-    }, [includeMedals]);
+            { field: 'gold', hide: !includeMedals },
+            { field: 'silver', hide: !includeMedals },
+            { field: 'bronze', hide: !includeMedals },
+            { field: 'total', hide: !includeMedals },
+        ],
+        [includeMedals]
+    );
 
     const toggleMedals = useCallback(() => {
         setIncludeMedals((val) => !val);
     }, []);
 
+    const toggleCap = useCallback(() => {
+        setCap((val) => !val);
+    }, []);
+
     const defaultColDef = useMemo(
         () => ({
             width: 100,
+            headerComponent: (props) => (
+                <>{cap ? props.displayName.toUpperCase() : props.displayName}</>
+            ),
         }),
-        []
+        [cap]
     );
     useEffect(() => {
         fetch(url)
@@ -52,7 +52,10 @@ const OlympicWinners = () => {
 
     return (
         <div className='ag-theme-quartz' style={{ height: '100%' }}>
-            <button onClick={toggleMedals}>Toggle</button>
+            <button onClick={toggleMedals}>
+                {includeMedals ? 'Hide' : 'Show'} Medals
+            </button>
+            <button onClick={toggleCap}>{cap ? 'Normal' : 'CAPS'}</button>
             <AgGridReact
                 ref={gridRef}
                 rowData={rowData}
