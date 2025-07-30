@@ -9,7 +9,7 @@ const numberFormatter = Intl.NumberFormat('en-GB', {
 });
 const myValueFormatter = (p) => numberFormatter.format(p.value);
 
-const rowCount = 15;
+const rowCount = 4;
 const arr = new Array(rowCount);
 let carData = [...arr].map(() => createCar());
 
@@ -31,6 +31,16 @@ const Cars = () => {
         const newRecord = createCar();
         carData = [newRecord, ...carData];
         setRowData(carData);
+    }, []);
+
+    const onTxInsertOne = useCallback(() => {
+        const newRecord = createCar();
+        const res = gridRef.current.api.applyTransaction({
+            add: [newRecord],
+            update: [],
+            remove: [],
+        });
+        console.log(res);
     }, []);
 
     const getRowId = useCallback((params) => String(params.data.id), []);
@@ -71,6 +81,9 @@ const Cars = () => {
                 <button onClick={onReverse}>Reverse</button>
                 <button onClick={onRemove}>Remove Selected</button>
                 <button onClick={onUpdate}>Update Some</button>
+            </div>
+            <div>
+                <button onClick={onTxInsertOne}>Tx Insert One</button>
             </div>
             <AgGridReact
                 ref={gridRef}
