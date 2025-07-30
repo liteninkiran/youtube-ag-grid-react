@@ -10,6 +10,7 @@ const colDefs = [
     {
         field: 'athlete',
         headerName: 'Competitor',
+        resizable: true,
     },
     { field: 'age' },
     { field: 'country' },
@@ -26,7 +27,9 @@ const OlympicWinners = () => {
     const gridRef = useRef();
     const [rowData, setRowData] = useState();
 
-    const defaultColDefMemoFn = () => ({});
+    const defaultColDefMemoFn = () => ({
+        resizable: false,
+    });
     const effectFn = () => {
         fetch(url)
             .then((result) => result.json())
