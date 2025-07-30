@@ -56,6 +56,14 @@ const Cars = () => {
         gridRef.current.api.applyTransaction({ update: updatedRecords });
     }, []);
 
+    const onTxRemove = useCallback(() => {
+        const selectedNodes = gridRef.current.api.getSelectedNodes();
+        const selectedData = selectedNodes.map((node) => node.data);
+        gridRef.current.api.applyTransaction({
+            remove: selectedData,
+        });
+    }, []);
+
     const getRowId = useCallback((params) => String(params.data.id), []);
 
     const onReverse = useCallback(() => {
@@ -98,6 +106,7 @@ const Cars = () => {
             <div>
                 <button onClick={onTxInsert}>Tx Insert One</button>
                 <button onClick={onTxUpdate}>Tx Update Some</button>
+                <button onClick={onTxRemove}>Tx Remove Selected</button>
             </div>
             <AgGridReact
                 ref={gridRef}
