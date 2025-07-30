@@ -1,3 +1,6 @@
-const HelloWorldComp = (props) => <>Hello World</>;
+const HelloWorldComp = (props) => {
+    console.log(props);
+    return <>Hello World</>;
+};
 
 export default HelloWorldComp;
