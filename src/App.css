@@ -12,3 +12,11 @@
 .red-row {
     background-color: rgb(223, 196, 196);
 }
+
+.ag-header-cell-label {
+    justify-content: center;
+}
+
+.ag-header-cell-comp-wrapper {
+    justify-content: center;
+}

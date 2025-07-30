@@ -16,25 +16,45 @@ const colDefs = [
         field: 'age',
         tooltipValueGetter: (p) => Math.random(),
     },
-    { field: 'country' },
-    { field: 'year' },
+    // {
+    //     headerName: 'Medals',
+    //     marryChildren: true,
+    //     children: [
+    //         { field: 'total', columnGroupShow: 'closed' },
+    //         { field: 'gold', columnGroupShow: 'open' },
+    //         { field: 'silver', columnGroupShow: 'open' },
+    //         { field: 'bronze', columnGroupShow: 'open' },
+    //     ],
+    // },
+    {
+        headerName: 'Level 1',
+        children: [
+            {
+                headerName: 'Level 2',
+                children: [
+                    {
+                        headerName: 'Level 3',
+                        children: [{ field: 'country' }, { field: 'year' }],
+                    },
+                ],
+            },
+        ],
+    },
+    // { field: 'country' },
+    // { field: 'year' },
     { field: 'date' },
     { field: 'sport' },
-    { field: 'gold' },
-    { field: 'silver' },
-    { field: 'bronze' },
-    { field: 'total' },
+
+    { field: 'total', columnGroupShow: 'closed' },
+    { field: 'gold', columnGroupShow: 'open' },
+    { field: 'silver', columnGroupShow: 'open' },
+    { field: 'bronze', columnGroupShow: 'open' },
 ];
 
 const OlympicWinners = () => {
     const gridRef = useRef();
     const [rowData, setRowData] = useState();
-    const defaultColDef = useMemo(
-        () => ({
-            width: 300,
-        }),
-        []
-    );
+    const defaultColDef = useMemo(() => ({}), []);
     useEffect(() => {
         fetch(url)
             .then((result) => result.json())
