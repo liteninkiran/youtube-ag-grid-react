@@ -4,19 +4,11 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 // AG Grid
 import { AgGridReact } from 'ag-grid-react';
 
-import MyFilter from './MyFilter';
-import MyFloatingFilter from './MyFloatingFilter';
-
 const url = 'https://www.ag-grid.com/example-assets/olympic-winners.json';
 
 const colDefs = [
     { field: 'athlete' },
-    {
-        field: 'year',
-        filter: MyFilter,
-        floatingFilter: true,
-        floatingFilterComponent: MyFloatingFilter,
-    },
+    { field: 'year' },
     { field: 'age' },
     { field: 'country' },
     { field: 'date' },
@@ -31,10 +23,7 @@ const OlympicWinners = () => {
     const gridRef = useRef();
     const [rowData, setRowData] = useState();
 
-    const defaultColDefMemoFn = () => ({
-        minWidth: 100,
-        editable: true,
-    });
+    const defaultColDefMemoFn = () => ({});
     const effectFn = () => {
         fetch(url)
             .then((result) => result.json())
@@ -45,16 +34,14 @@ const OlympicWinners = () => {
 
     return (
         <div className='ag-theme-quartz' style={{ height: '100%' }}>
-            <div style={{ height: '100%' }}>
-                <AgGridReact
-                    ref={gridRef}
-                    rowData={rowData}
-                    columnDefs={colDefs}
-                    defaultColDef={defaultColDef}
-                    animateRows={true}
-                    theme='legacy'
-                />
-            </div>
+            <AgGridReact
+                ref={gridRef}
+                rowData={rowData}
+                columnDefs={colDefs}
+                defaultColDef={defaultColDef}
+                animateRows={true}
+                theme='legacy'
+            />
         </div>
     );
 };
