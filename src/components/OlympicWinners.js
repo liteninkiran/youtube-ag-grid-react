@@ -13,8 +13,17 @@ const OlympicWinners = () => {
     const [cap, setCap] = useState(false);
     const colDefs = useMemo(
         () => [
-            { field: 'athlete' },
-            { field: 'age' },
+            {
+                // field: 'athlete',
+                colId: 'athlete',
+                valueGetter: (p) => p.data.athlete,
+                headerName: 'Athlete',
+                initialWidth: 100,
+            },
+            {
+                field: 'age',
+                initialWidth: 100,
+            },
             { field: 'country' },
             { field: 'year' },
             { field: 'date' },
@@ -37,7 +46,7 @@ const OlympicWinners = () => {
 
     const defaultColDef = useMemo(
         () => ({
-            width: 100,
+            resizable: true,
             headerComponent: (props) => (
                 <>{cap ? props.displayName.toUpperCase() : props.displayName}</>
             ),
