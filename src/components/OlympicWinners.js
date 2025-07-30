@@ -11,6 +11,8 @@ const colDefs = [
         field: 'athlete',
         headerName: 'Competitor',
         flex: 2,
+        editable: false,
+        sortable: false,
     },
     {
         field: 'age',
@@ -35,6 +37,8 @@ const OlympicWinners = () => {
         () => ({
             resizable: true,
             flex: 1,
+            editable: true,
+            sortable: true,
         }),
         []
     );
