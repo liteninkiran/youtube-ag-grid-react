@@ -26,17 +26,17 @@ const colDefs = [
 const OlympicWinners = () => {
     const gridRef = useRef();
     const [rowData, setRowData] = useState();
-
-    const defaultColDefMemoFn = () => ({
-        resizable: false,
-    });
-    const effectFn = () => {
+    const defaultColDef = useMemo(
+        () => ({
+            resizable: false,
+        }),
+        []
+    );
+    useEffect(() => {
         fetch(url)
             .then((result) => result.json())
             .then((rowData) => setRowData(rowData));
-    };
-    const defaultColDef = useMemo(defaultColDefMemoFn, []);
-    useEffect(effectFn, []);
+    }, []);
 
     return (
         <div className='ag-theme-quartz' style={{ height: '100%' }}>
