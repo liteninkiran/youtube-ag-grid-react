@@ -9,7 +9,7 @@ const numberFormatter = Intl.NumberFormat('en-GB', {
 });
 const myValueFormatter = (p) => numberFormatter.format(p.value);
 
-const rowCount = 4;
+const rowCount = 15;
 const arr = new Array(rowCount);
 let carData = [...arr].map(() => createCar());
 
@@ -27,13 +27,13 @@ const Cars = () => {
         },
     ]);
 
-    const onInsertOne = useCallback(() => {
+    const onInsert = useCallback(() => {
         const newRecord = createCar();
         carData = [newRecord, ...carData];
         setRowData(carData);
     }, []);
 
-    const onTxInsertOne = useCallback(() => {
+    const onTxInsert = useCallback(() => {
         const newRecord = createCar();
         const res = gridRef.current.api.applyTransaction({
             add: [newRecord],
@@ -41,6 +41,19 @@ const Cars = () => {
             remove: [],
         });
         console.log(res);
+    }, []);
+
+    const onTxUpdate = useCallback(() => {
+        const updatedRecords = [];
+        gridRef.current.api.forEachNode(({ data: car }) => {
+            if (Math.random() > 0.5) {
+                return;
+            }
+            const price = car.price + (1000 - Math.floor(Math.random() * 2000));
+            updatedRecords.push({ ...car, price });
+        });
+
+        gridRef.current.api.applyTransaction({ update: updatedRecords });
     }, []);
 
     const getRowId = useCallback((params) => String(params.data.id), []);
@@ -77,13 +90,14 @@ const Cars = () => {
     return (
         <div className='ag-theme-quartz' style={{ height: '100%' }}>
             <div>
-                <button onClick={onInsertOne}>Insert One</button>
+                <button onClick={onInsert}>Insert One</button>
                 <button onClick={onReverse}>Reverse</button>
                 <button onClick={onRemove}>Remove Selected</button>
                 <button onClick={onUpdate}>Update Some</button>
             </div>
             <div>
-                <button onClick={onTxInsertOne}>Tx Insert One</button>
+                <button onClick={onTxInsert}>Tx Insert One</button>
+                <button onClick={onTxUpdate}>Tx Update Some</button>
             </div>
             <AgGridReact
                 ref={gridRef}
