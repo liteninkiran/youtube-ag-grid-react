@@ -1,5 +1,9 @@
 // AG Grid
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    AllCommunityModule,
+    ModuleRegistry,
+    RowSelectionModule,
+} from 'ag-grid-community';
 import {
     MenuModule,
     RowGroupingModule,
@@ -35,6 +39,7 @@ ModuleRegistry.registerModules([
     StatusBarModule,
     SideBarModule,
     ColumnsToolPanelModule,
+    RowSelectionModule,
 ]);
 
 const App = () => {
