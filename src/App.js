@@ -7,6 +7,10 @@ import {
     SetFilterModule,
     ClientSideRowModelModule,
     MultiFilterModule,
+    StatusBarModule,
+    SideBarModule,
+    FiltersToolPanelModule,
+    ColumnsToolPanelModule,
 } from 'ag-grid-enterprise';
 import 'ag-grid-enterprise';
 
@@ -27,6 +31,9 @@ ModuleRegistry.registerModules([
     RowGroupingPanelModule,
     SetFilterModule,
     MultiFilterModule,
+    StatusBarModule,
+    SideBarModule,
+    ColumnsToolPanelModule,
 ]);
 
 const App = () => {
