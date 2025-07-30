@@ -10,19 +10,13 @@ const OlympicWinners = () => {
     const gridRef = useRef();
     const [rowData, setRowData] = useState();
     const [includeMedals, setIncludeMedals] = useState(true);
-    const [cap, setCap] = useState(false);
+    const [agePinned, setAgePinned] = useState(undefined);
     const colDefs = useMemo(
         () => [
-            {
-                // field: 'athlete',
-                colId: 'athlete',
-                valueGetter: (p) => p.data.athlete,
-                headerName: 'Athlete',
-                initialWidth: 100,
-            },
+            { field: 'athlete' },
             {
                 field: 'age',
-                initialWidth: 100,
+                pinned: agePinned,
             },
             { field: 'country' },
             { field: 'year' },
@@ -33,25 +27,18 @@ const OlympicWinners = () => {
             { field: 'bronze', hide: !includeMedals },
             { field: 'total', hide: !includeMedals },
         ],
-        [includeMedals]
+        [agePinned, includeMedals]
     );
 
     const toggleMedals = useCallback(() => {
         setIncludeMedals((val) => !val);
     }, []);
 
-    const toggleCap = useCallback(() => {
-        setCap((val) => !val);
-    }, []);
-
     const defaultColDef = useMemo(
         () => ({
             resizable: true,
-            headerComponent: (props) => (
-                <>{cap ? props.displayName.toUpperCase() : props.displayName}</>
-            ),
         }),
-        [cap]
+        []
     );
     useEffect(() => {
         fetch(url)
@@ -64,7 +51,12 @@ const OlympicWinners = () => {
             <button onClick={toggleMedals}>
                 {includeMedals ? 'Hide' : 'Show'} Medals
             </button>
-            <button onClick={toggleCap}>{cap ? 'Normal' : 'CAPS'}</button>
+
+            <button onClick={() => setAgePinned('left')}>Left</button>
+            <button onClick={() => setAgePinned('right')}>Right</button>
+            <button onClick={() => setAgePinned(null)}>NULL</button>
+            <button onClick={() => setAgePinned(undefined)}>undefined</button>
+
             <AgGridReact
                 ref={gridRef}
                 rowData={rowData}
