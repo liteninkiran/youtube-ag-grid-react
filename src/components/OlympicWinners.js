@@ -64,6 +64,7 @@ const OlympicWinners = () => {
                 defaultColDef={defaultColDef}
                 animateRows={true}
                 theme='legacy'
+                maintainColumnOrder={true}
             />
         </div>
     );
