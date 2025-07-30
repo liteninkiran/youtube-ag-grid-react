@@ -8,10 +8,22 @@ import HelloWorldComp from './HelloWorldComp';
 const url = 'https://www.ag-grid.com/example-assets/olympic-winners.json';
 
 const colDefs = [
-    { field: 'athlete', cellRenderer: HelloWorldComp },
-    { field: 'year', filter: HelloWorldComp },
-    { field: 'age', headerComponent: HelloWorldComp },
-    { field: 'country' },
+    {
+        field: 'athlete',
+        cellRenderer: HelloWorldComp,
+        cellRendererParams: { name: 'Tom' },
+    },
+    {
+        field: 'age',
+        filter: HelloWorldComp,
+        filterParams: { name: 'Dick' },
+    },
+    {
+        field: 'country',
+        headerComponent: HelloWorldComp,
+        headerComponentParams: { name: 'Harry' },
+    },
+    { field: 'year' },
     { field: 'date' },
     { field: 'sport' },
     { field: 'gold' },
