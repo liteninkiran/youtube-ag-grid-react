@@ -3,6 +3,7 @@ import {
     AllCommunityModule,
     ModuleRegistry,
     RowSelectionModule,
+    TooltipModule,
 } from 'ag-grid-community';
 import {
     MenuModule,
@@ -13,7 +14,6 @@ import {
     MultiFilterModule,
     StatusBarModule,
     SideBarModule,
-    FiltersToolPanelModule,
     ColumnsToolPanelModule,
 } from 'ag-grid-enterprise';
 import 'ag-grid-enterprise';
@@ -39,6 +39,7 @@ ModuleRegistry.registerModules([
     SideBarModule,
     ColumnsToolPanelModule,
     RowSelectionModule,
+    TooltipModule,
 ]);
 
 const App = () => {
