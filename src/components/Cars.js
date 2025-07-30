@@ -36,11 +36,19 @@ const Cars = () => {
         setRowData(carData);
     }, []);
 
+    const onRemoveSelected = useCallback(() => {
+        const selectedNodes = gridRef.current.api.getSelectedNodes();
+        const selectedIds = selectedNodes.map((node) => node.data.id);
+        carData = carData.filter((car) => selectedIds.indexOf(car.id) < 0);
+        setRowData(carData);
+    }, []);
+
     return (
         <div className='ag-theme-quartz' style={{ height: '100%' }}>
             <div>
                 <button onClick={onInsertOne}>Insert One</button>
                 <button onClick={onReverse}>Reverse</button>
+                <button onClick={onRemoveSelected}>Remove Selected</button>
             </div>
             <AgGridReact
                 ref={gridRef}
