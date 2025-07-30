@@ -32,7 +32,7 @@ const OlympicWinners = () => {
     const [rowData, setRowData] = useState();
 
     const defaultColDefMemoFn = () => ({
-        flex: 1,
+        minWidth: 100,
         editable: true,
     });
     const effectFn = () => {

@@ -1,5 +1,5 @@
 import { useGridFilter } from 'ag-grid-react';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import './styles.css';
 
 const MyFilter = (props) => {
@@ -19,6 +19,11 @@ const MyFilter = (props) => {
 
     // Filtering
     useGridFilter({ doesFilterPass, getModelAsString });
+
+    useEffect(() => {
+        console.log('Filter Created');
+        return () => console.log('Filter Destroyed');
+    }, []);
 
     return (
         <div className='MyFilter'>

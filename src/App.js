@@ -30,9 +30,8 @@ ModuleRegistry.registerModules([
 ]);
 
 const App = () => {
-    // return <SpaceMission />;
     return (
-        <div style={{ height: '100vh', margin: '20px' }}>
+        <div style={{ height: '90vh', margin: '20px' }}>
             {/* <SpaceMission /> */}
             <OlympicWinners />
         </div>

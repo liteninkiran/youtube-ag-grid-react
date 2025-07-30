@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
 const MyFloatingFilter = (props) => {
     // Props
@@ -10,6 +10,11 @@ const MyFloatingFilter = (props) => {
 
     // Callbacks
     const valueChanged = useCallback(valueChangedFn, [onModelChange]);
+
+    useEffect(() => {
+        console.log('Floating Filter Created');
+        return () => console.log('Floating Filter Destroyed');
+    }, []);
 
     return (
         <div className='MyFilter'>
