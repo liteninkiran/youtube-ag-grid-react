@@ -1,5 +1,5 @@
 let sequence = 1;
-const carTypes = ['Mazda MX5', 'BMW M3', 'Porsche 911', 'Mercedes'];
+const carTypes = ['Mazda MX5', 'BMW M3', 'Porsche 911', 'Mercedes S-Class'];
 const colours = ['Red', 'Blue', 'Green', 'White', 'Black'];
 
 export const createCar = () => ({

@@ -9,32 +9,38 @@ const numberFormatter = Intl.NumberFormat('en-GB', {
 });
 const myValueFormatter = (p) => numberFormatter.format(p.value);
 
-const rowCount = 5;
+const rowCount = 4;
 const arr = new Array(rowCount);
 let carData = [...arr].map(() => createCar());
 
 const Cars = () => {
     const gridRef = useRef();
     const [rowData, setRowData] = useState(carData);
-    const columnDefs = [
-        { field: 'type' },
+    const [columnDefs, setColumnDefs] = useState([
+        { field: 'type', sortable: true },
         { field: 'year' },
         { field: 'colour' },
         { field: 'price', valueFormatter: myValueFormatter },
-    ];
+    ]);
 
-    const insertOne = () => {
+    const onInsertOne = useCallback(() => {
         const newRecord = createCar();
         carData = [newRecord, ...carData];
         setRowData(carData);
-    };
+    }, []);
 
     const getRowId = useCallback((params) => String(params.data.id), []);
+
+    const onReverse = useCallback(() => {
+        carData = [...carData].reverse();
+        setRowData(carData);
+    }, []);
 
     return (
         <div className='ag-theme-quartz' style={{ height: '100%' }}>
             <div>
-                <button onClick={insertOne}>Insert One</button>
+                <button onClick={onInsertOne}>Insert One</button>
+                <button onClick={onReverse}>Reverse</button>
             </div>
             <AgGridReact
                 ref={gridRef}
