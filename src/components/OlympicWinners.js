@@ -65,6 +65,30 @@ const OlympicWinners = () => {
         []
     );
 
+    const onGroup = useCallback(
+        () =>
+            gridRef.current.api.applyColumnState({
+                state: [
+                    {
+                        colId: 'athlete',
+                        rowGroupIndex: 1,
+                        hide: true,
+                    },
+                    {
+                        colId: 'country',
+                        rowGroupIndex: 0,
+                        hide: true,
+                    },
+                    { colId: 'gold', aggFunc: 'sum' },
+                    { colId: 'silver', aggFunc: 'sum' },
+                    { colId: 'bronze', aggFunc: 'sum' },
+                    { colId: 'total', aggFunc: 'sum' },
+                ],
+                applyOrder: true,
+            }),
+        []
+    );
+
     const onSort = useCallback(
         () =>
             gridRef.current.api.applyColumnState({
@@ -96,7 +120,9 @@ const OlympicWinners = () => {
     useEffect(() => {
         fetch(url)
             .then((result) => result.json())
-            .then((rowData) => setRowData(rowData));
+            .then((rowData) =>
+                setRowData(rowData.filter((row) => row.athlete !== ''))
+            );
     }, []);
 
     return (
@@ -122,6 +148,7 @@ const OlympicWinners = () => {
             <button onClick={onRestoreColState}>Restore State</button>
             <button onClick={onWidth}>Width</button>
             <button onClick={onSort}>Sort</button>
+            <button onClick={onGroup}>Group</button>
 
             <AgGridReact
                 ref={gridRef}
