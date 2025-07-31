@@ -27,7 +27,7 @@ const OlympicWinners = () => {
 
     const defaultColDef = useMemo(
         () => ({
-            resizable: false,
+            resizable: true,
             suppressHeaderMenuButton: true,
         }),
         []
