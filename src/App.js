@@ -16,6 +16,7 @@ import {
     StatusBarModule,
     SideBarModule,
     ColumnsToolPanelModule,
+    PivotModule,
 } from 'ag-grid-enterprise';
 import 'ag-grid-enterprise';
 
@@ -42,6 +43,7 @@ ModuleRegistry.registerModules([
     RowSelectionModule,
     TooltipModule,
     ColumnApiModule,
+    PivotModule,
 ]);
 
 const App = () => {

@@ -89,6 +89,21 @@ const OlympicWinners = () => {
         []
     );
 
+    const onGroupApi = useCallback(() => {
+        gridRef.current.api.setRowGroupColumns(['country', 'athlete']);
+        gridRef.current.api.setColumnsVisible(['country', 'athlete'], false);
+        gridRef.current.api.setValueColumns([
+            'gold',
+            'silver',
+            'bronze',
+            'total',
+        ]);
+        gridRef.current.api.setColumnAggFunc('gold', 'sum');
+        gridRef.current.api.setColumnAggFunc('silver', 'sum');
+        gridRef.current.api.setColumnAggFunc('bronze', 'sum');
+        gridRef.current.api.setColumnAggFunc('total', 'sum');
+    }, []);
+
     const onSort = useCallback(
         () =>
             gridRef.current.api.applyColumnState({
@@ -149,6 +164,12 @@ const OlympicWinners = () => {
             <button onClick={onWidth}>Width</button>
             <button onClick={onSort}>Sort</button>
             <button onClick={onGroup}>Group</button>
+
+            <br />
+            <b>Column API</b>
+            <br />
+
+            <button onClick={onGroupApi}>Group API</button>
 
             <AgGridReact
                 ref={gridRef}
