@@ -8,6 +8,7 @@ const url = 'https://www.ag-grid.com/example-assets/olympic-winners.json';
 
 const OlympicWinners = () => {
     const gridRef = useRef();
+    const savedColState = useRef();
     const [rowData, setRowData] = useState();
     const [includeMedals, setIncludeMedals] = useState(true);
     const [agePinned, setAgePinned] = useState(undefined);
@@ -34,6 +35,58 @@ const OlympicWinners = () => {
         setIncludeMedals((val) => !val);
     }, []);
 
+    const onSaveColState = useCallback(
+        () => (savedColState.current = gridRef.current.api.getColumnState()),
+        []
+    );
+
+    const onRestoreColState = useCallback(
+        () =>
+            gridRef.current.api.applyColumnState({
+                state: savedColState.current,
+                applyOrder: true,
+            }),
+        []
+    );
+
+    const onWidth = useCallback(
+        () =>
+            gridRef.current.api.applyColumnState({
+                state: [
+                    {
+                        colId: 'athlete',
+                        width: 100,
+                    },
+                ],
+                defaultState: {
+                    width: 300,
+                },
+            }),
+        []
+    );
+
+    const onSort = useCallback(
+        () =>
+            gridRef.current.api.applyColumnState({
+                state: [
+                    {
+                        colId: 'gold',
+                        sort: 'desc',
+                        sortIndex: 0,
+                    },
+                    {
+                        colId: 'silver',
+                        sort: 'desc',
+                        sortIndex: 1,
+                    },
+                ],
+                defaultState: {
+                    sort: null,
+                },
+            }),
+        []
+    );
+
     const defaultColDef = useMemo(
         () => ({
             resizable: true,
@@ -52,10 +105,23 @@ const OlympicWinners = () => {
                 {includeMedals ? 'Hide' : 'Show'} Medals
             </button>
 
+            <br />
+            <b>Pinning Columns</b>
+            <br />
+
             <button onClick={() => setAgePinned('left')}>Left</button>
             <button onClick={() => setAgePinned('right')}>Right</button>
             <button onClick={() => setAgePinned(null)}>NULL</button>
             <button onClick={() => setAgePinned(undefined)}>undefined</button>
+
+            <br />
+            <b>Column State</b>
+            <br />
+
+            <button onClick={onSaveColState}>Save State</button>
+            <button onClick={onRestoreColState}>Restore State</button>
+            <button onClick={onWidth}>Width</button>
+            <button onClick={onSort}>Sort</button>
 
             <AgGridReact
                 ref={gridRef}

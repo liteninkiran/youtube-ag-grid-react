@@ -1,6 +1,7 @@
 // AG Grid
 import {
     AllCommunityModule,
+    ColumnApiModule,
     ModuleRegistry,
     RowSelectionModule,
     TooltipModule,
@@ -40,11 +41,12 @@ ModuleRegistry.registerModules([
     ColumnsToolPanelModule,
     RowSelectionModule,
     TooltipModule,
+    ColumnApiModule,
 ]);
 
 const App = () => {
     return (
-        <div style={{ height: '90vh', margin: '20px' }}>
+        <div style={{ height: '80vh', margin: '20px' }}>
             {/* <SpaceMission /> */}
             <OlympicWinners />
         </div>
