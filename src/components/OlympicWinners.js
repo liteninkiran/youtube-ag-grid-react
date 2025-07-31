@@ -11,9 +11,9 @@ const OlympicWinners = () => {
     const [rowData, setRowData] = useState();
     const colDefs = useMemo(
         () => [
-            { field: 'athlete', rowGroup: true },
+            { field: 'athlete', rowGroupIndex: 1 },
             { field: 'age' },
-            { field: 'country', rowGroup: true },
+            { field: 'country', rowGroupIndex: 0 },
             { field: 'year' },
             { field: 'date' },
             { field: 'sport' },
@@ -27,7 +27,8 @@ const OlympicWinners = () => {
 
     const defaultColDef = useMemo(
         () => ({
-            resizable: true,
+            resizable: false,
+            suppressHeaderMenuButton: true,
         }),
         []
     );
