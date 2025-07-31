@@ -11,9 +11,9 @@ const OlympicWinners = () => {
     const [rowData, setRowData] = useState();
     const colDefs = useMemo(
         () => [
-            { field: 'athlete' },
+            { field: 'athlete', rowGroup: true },
             { field: 'age' },
-            { field: 'country' },
+            { field: 'country', rowGroup: true },
             { field: 'year' },
             { field: 'date' },
             { field: 'sport' },
