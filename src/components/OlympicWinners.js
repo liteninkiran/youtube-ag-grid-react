@@ -25,6 +25,11 @@ const OlympicWinners = () => {
         []
     );
 
+    const printColumns = () => {
+        const cols = gridRef.current.api.getAllGridColumns();
+        console.log('Grid Columns', cols);
+    };
+
     const defaultColDef = useMemo(
         () => ({
             resizable: true,
@@ -42,6 +47,7 @@ const OlympicWinners = () => {
 
     return (
         <div className='ag-theme-quartz' style={{ height: '100%' }}>
+            <button onClick={printColumns}>Print Columns</button>
             <AgGridReact
                 ref={gridRef}
                 rowData={rowData}
