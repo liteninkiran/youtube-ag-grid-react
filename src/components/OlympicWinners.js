@@ -45,6 +45,18 @@ const OlympicWinners = () => {
             );
     }, []);
 
+    const autoGroupColumnDef = {
+        headerName: 'Test',
+        cellRenderer: 'agGroupCellRenderer',
+        cellRendererParams: {
+            suppressCount: true,
+            // `cellRendererParams.checkbox` has been deprecated. Use `rowSelection.checkboxLocation = "autoGroupColumn"` instead.
+            // checkbox: true,
+            innerRenderer: (p) => <b>{p.value}</b>,
+        },
+        // field: 'sport',
+    };
+
     return (
         <div className='ag-theme-quartz' style={{ height: '100%' }}>
             <button onClick={printColumns}>Print Columns</button>
@@ -56,6 +68,8 @@ const OlympicWinners = () => {
                 animateRows={true}
                 theme='legacy'
                 maintainColumnOrder={true}
+                autoGroupColumnDef={autoGroupColumnDef}
+                showOpenedGroup={true}
             />
         </div>
     );
