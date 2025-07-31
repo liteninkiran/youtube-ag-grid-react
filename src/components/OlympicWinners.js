@@ -72,6 +72,10 @@ const OlympicWinners = () => {
                 theme='legacy'
                 maintainColumnOrder={true}
                 autoGroupColumnDef={autoGroupColumnDef}
+                groupRowRendererParams={{
+                    suppressCount: true,
+                    innerRenderer: (p) => <b>{p.value}</b>,
+                }}
             />
         </div>
     );
