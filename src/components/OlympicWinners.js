@@ -11,25 +11,16 @@ const OlympicWinners = () => {
     const [rowData, setRowData] = useState();
     const colDefs = useMemo(
         () => [
-            {
-                headerName: 'Custom Header',
-                showRowGroup: true,
-                cellRenderer: 'agGroupCellRenderer',
-                cellRendererParams: {
-                    suppressCount: true,
-                    innerRenderer: (p) => <b>{p.value}</b>,
-                },
-            },
-            { field: 'athlete', rowGroupIndex: 1, hide: true },
+            { field: 'athlete' },
             { field: 'age' },
-            { field: 'country', rowGroupIndex: 0, hide: true },
+            { field: 'country' },
             { field: 'year' },
             { field: 'date' },
             { field: 'sport' },
-            { field: 'gold' },
-            { field: 'silver' },
-            { field: 'bronze' },
-            { field: 'total' },
+            { field: 'gold', enableRowGroup: false },
+            { field: 'silver', enableRowGroup: false },
+            { field: 'bronze', enableRowGroup: false },
+            { field: 'total', enableRowGroup: false },
         ],
         []
     );
@@ -43,6 +34,7 @@ const OlympicWinners = () => {
         () => ({
             resizable: true,
             suppressHeaderMenuButton: true,
+            enableRowGroup: true,
         }),
         []
     );
@@ -54,24 +46,10 @@ const OlympicWinners = () => {
             );
     }, []);
 
-    const autoGroupColumnDef = {
-        // headerName: 'Test',
-        // cellRenderer: 'agGroupCellRenderer',
-        cellRendererParams: {},
-    };
-
-    const groupDisplayTypes = [
-        'singleColumn',
-        'multipleColumns',
-        'groupRows',
-        'custom',
-    ];
-
     return (
         <div className='ag-theme-quartz' style={{ height: '100%' }}>
             <button onClick={printColumns}>Print Columns</button>
             <AgGridReact
-                groupDisplayType={groupDisplayTypes[3]}
                 ref={gridRef}
                 rowData={rowData}
                 columnDefs={colDefs}
@@ -79,7 +57,7 @@ const OlympicWinners = () => {
                 animateRows={true}
                 theme='legacy'
                 maintainColumnOrder={true}
-                autoGroupColumnDef={autoGroupColumnDef}
+                rowGroupPanelShow='always'
             />
         </div>
     );
